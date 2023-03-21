@@ -1,0 +1,122 @@
+@import "./variables.scss";
+@for $i from 1 through 50 {
+    .font-size-#{$i} {
+        font-size: 1px * $i;
+      }
+      .m-t-#{$i} {
+        margin-top: 1px * $i;
+      }
+      .m-l-#{$i} {
+        margin-left: 1px * $i;
+      }
+      .m-r-#{$i} {
+        margin-right: 1px * $i;
+      }
+      .m-b-#{$i} {
+        margin-bottom: 1px * $i;
+      }
+      .margin-#{$i} {
+        margin: 1px * $i;
+      }
+      .p-t-#{$i} {
+        padding-top: 1px * $i;
+      }
+      .p-l-#{$i} {
+        padding-left: 1px * $i;
+      }
+      .p-r-#{$i} {
+        padding-right: 1px * $i;
+      }
+      .p-b-#{$i} {
+        padding-bottom: 1px * $i;
+      }
+      .padding-#{$i} {
+        padding: 1px * $i;
+      }
+}  
+.darkGray {
+    background-color: $darkGray;
+  }
+  body {
+    padding: 2em;
+  }
+  
+  table.table {
+    width: 100%;
+    border-spacing: 0;
+  }
+  thead {
+    background-color: $tableHeader;
+  }
+  .table th,
+  .table td {
+    text-align: left;
+    padding: 0.25em;
+  }
+  
+  .lightGray {
+    background-color: $lightGray;
+  }
+  .table tr {
+    border-bottom: 1px solid $gray;
+  }
+   .tbody_title {
+    display: none;
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    tr {
+      display: flex;
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      margin: 0.5em 0;
+      border: 1px solid rgba(3, 3, 3, 0.2);
+    }
+    td,
+    th {
+      flex: 300px !important;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    tr {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin: 0.5em 0;
+      border: 1px solid rgba(3, 3, 3, 0.2);
+    }
+    thead {
+      display: none;
+    }
+    .tbody_title {
+      display: block;
+      font-weight: bold;
+    }
+    th {
+      flex: none;
+    }
+  }
+  input{
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    margin-right: -20px;
+  }
+  .dFaC{
+display: flex;
+align-items: center;
+  }
+  .pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    justify-content: center;
+}
+  ul{
+    li{
+      list-style-type: none;
+      border: 1px solid #dee2e6;
+      padding: 5px 10px;
+    }
+  }
