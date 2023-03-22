@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../app.scss";
 import Input from "../Component/input";
 import TableCom from "../Component/Table";
@@ -13,7 +14,8 @@ function Dashboard() {
   const [filter, setFilter] = useState({});
   const [itemOffset, setItemOffset] = useState(0);
   const [itemsPerPage] = useState(10);
-
+  const history = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     if (data.length > 0) {
       setHeaders(Object.keys(data[0]));
@@ -41,6 +43,11 @@ function Dashboard() {
       }
     }
   }, [search]);
+  useEffect(() => {
+    const no = history.search.split("?")[1];
+    const newOffset = (no ? no : 0 * itemsPerPage) % filterData.length;
+    setItemOffset(newOffset);
+  }, []);
 
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = filterData.slice(itemOffset, endOffset);
@@ -48,6 +55,7 @@ function Dashboard() {
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % filterData.length;
     setItemOffset(newOffset);
+    navigate(`/home?${event.selected}`);
   };
 
   return (

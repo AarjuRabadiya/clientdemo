@@ -1,18 +1,24 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./app.scss";
 
 import Dashboard from "./Pages/dashboard";
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/home",
+      element: <Dashboard />,
+      //  children: [
+      //     {
+      //       path: "team",
+      //       element: <Team />,
+      //     },
+      //   ],
+    },
+  ]);
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/home" element={<Dashboard />}>
-            <Route index element={<Dashboard />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </div>
   );
 }
