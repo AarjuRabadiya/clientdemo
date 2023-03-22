@@ -2,25 +2,31 @@ import React, { useEffect, useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../app.scss";
+// import { useSelector, useDispatch } from "react-redux";
+// import { updateId } from "../Reducer/dashboard";
 import Input from "../Component/input";
 import TableCom from "../Component/Table";
-
+import "../app.scss";
 import data from "../JSON/data.json";
+
 function Dashboard() {
+  // const dashboard = useSelector((state) => state.dashboard.value);
   const [search, setSearch] = useState("");
   const [headers, setHeaders] = useState([]);
+  const [currentItems, setCurrentItems] = useState([]);
   const [filterData, setFilterData] = useState(data);
   const [filter, setFilter] = useState({});
-  const [itemOffset, setItemOffset] = useState(0);
   const [itemsPerPage] = useState(10);
   const history = useLocation();
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
   useEffect(() => {
     if (data.length > 0) {
       setHeaders(Object.keys(data[0]));
     }
   }, [data]);
+
   useEffect(() => {
     if (data.length > 0) {
       if (filter.length > 0) {
@@ -43,19 +49,22 @@ function Dashboard() {
       }
     }
   }, [search]);
+
   useEffect(() => {
     const no = history.search.split("?")[1];
     const newOffset = (no ? no : 0 * itemsPerPage) % filterData.length;
-    setItemOffset(newOffset);
+
+    const endOffset = newOffset + itemsPerPage;
+    setCurrentItems(filterData.slice(newOffset, endOffset));
   }, []);
 
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = filterData.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(filterData.length / itemsPerPage);
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % filterData.length;
-    setItemOffset(newOffset);
+
     navigate(`/home?${event.selected}`);
+    const endOffset = newOffset + itemsPerPage;
+    setCurrentItems(filterData.slice(newOffset, endOffset));
   };
 
   return (
