@@ -8,6 +8,12 @@ function App() {
     {
       path: "/home",
       element: <Dashboard />,
+      //  children: [
+      //     {
+      //       path: "team",
+      //       element: <Team />,
+      //     },
+      //   ],
     },
   ]);
   return (
